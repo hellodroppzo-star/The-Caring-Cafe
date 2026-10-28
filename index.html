@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE CARING CAFE</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f9; padding: 20px; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        .hidden { display: none; }
+        button { background: #4f46e5; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 15px; width: 100%; }
+        button:hover { background: #4338ca; }
+        .options { margin: 15px 0; }
+        textarea { width: 100%; padding: 8px; margin-top: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- પ્રશ્ન ૧ -->
+    <div id="q1-section">
+        <h3>Question 1: Are you allergic to any food items?</h3>
+        <div class="options">
+            <label><input type="radio" name="q1" value="yes"> Yes</label><br><br>
+            <label><input type="radio" name="q1" value="no"> No</label>
+        </div>
+        <button onclick="checkFirstAnswer()">Next</button>
+    </div>
+
+    <!-- પ્રશ્ન ૨ (જો હા આવે તો દેખાશે) -->
+    <div id="q2-section" class="hidden">
+        <h3>Question 2: Please share your food allergies and restrictions:</h3>
+        <textarea id="q2-answer" rows="4" placeholder="Enter your details here..."></textarea>
+        <button onclick="openPdfWithSecondAnswer()">Submit and Open PDF</button>
+    </div>
+</div>
+
+<script>
+    function checkFirstAnswer() {
+        const selected = document.querySelector('input[name="q1"]:checked');
+        if (!selected) {
+            alert('Please select an option before proceeding.');
+            return;
+        }
+
+        if (selected.value === 'no') {
+            // ના આવે તો સીધી PDF ખુલી જશે
+            window.open('https://1drv.ms/b/c/69d4a3a91f495772/IQAuY4HJOE2eR6nsInDioWXLAfcz3fzmXJ_9AEyLS9o2w_4?e=bY4aFo', '_blank');
+        } else {
+            // હા આવે તો બીજો પ્રશ્ન બતાવો
+            document.getElementById('q1-section').classList.add('hidden');
+            document.getElementById('q2-section').classList.remove('hidden');
+        }
+    }
+
+    function openPdfWithSecondAnswer() {
+        const answerText = document.getElementById('q2-answer').value.trim();
+        if (answerText === '') {
+            alert('Please enter your answer before proceeding.');
+            return;
+        }
+
+        // અહીં તમે જરૂર પડે તો 'answerText' ને સેવ પણ કરી શકો છો
+        // બીજા પ્રશ્નનો જવાબ આપ્યા પછી PDF ઓપન થશે
+        window.open('https://1drv.ms/b/c/69d4a3a91f495772/IQAuY4HJOE2eR6nsInDioWXLAfcz3fzmXJ_9AEyLS9o2w_4?e=bY4aFo', '_blank');
+    }
+</script>
+
+</body>
+</html>
